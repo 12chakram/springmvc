@@ -47,7 +47,7 @@
 	<!--bean id="viewResolver" class="org.springframework.web.servlet.view.BeanNameViewResolver" /-->
 
 	<bean id="employeeController" class="dw.spring3.rest.controller.EmployeeController">
-		<property name="employeeDS" ref="employeeDS" />
+		<property name="employeeService" ref="employeeService" />
 		<property name="jaxb2Mashaller" ref="jaxbMarshaller" />
 	</bean>
 </beans>

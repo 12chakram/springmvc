@@ -16,17 +16,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import dw.spring3.rest.bean.Employee;
 import dw.spring3.rest.bean.EmployeeList;
-import dw.spring3.rest.ds.EmployeeDS;
+import dw.spring3.rest.services.EmployeeService;
 
 @Controller
 public class EmployeeController {
 
-	private EmployeeDS employeeDS;
-	
-	public void setEmployeeDS(EmployeeDS ds) {
-		this.employeeDS = ds;
+	private EmployeeService employeeService;
+
+	public void setEmployeeService(EmployeeService employeeService) {
+		this.employeeService = employeeService;
 	}
-	
+
 	private Jaxb2Marshaller jaxb2Mashaller;
 	
 	public void setJaxb2Mashaller(Jaxb2Marshaller jaxb2Mashaller) {
@@ -35,9 +35,9 @@ public class EmployeeController {
 
 	private static final String XML_VIEW_NAME = "employees";
 	
-	@RequestMapping(method=RequestMethod.GET, value="/employee/{id}")
+	/*@RequestMapping(method=RequestMethod.GET, value="/employee/{id}")
 	public ModelAndView getEmployee(@PathVariable String id) {
-		Employee e = employeeDS.get(Long.parseLong(id));
+		Employee e = employeeService.get(Long.parseLong(id));
 		return new ModelAndView(XML_VIEW_NAME, "object", e);
 	}
 	
@@ -45,7 +45,7 @@ public class EmployeeController {
 	public ModelAndView updateEmployee(@RequestBody String body) {
 		Source source = new StreamSource(new StringReader(body));
 		Employee e = (Employee) jaxb2Mashaller.unmarshal(source);
-		employeeDS.update(e);
+		employeeService.update(e);
 		return new ModelAndView(XML_VIEW_NAME, "object", e);
 	}
 	
@@ -53,21 +53,21 @@ public class EmployeeController {
 	public ModelAndView addEmployee(@RequestBody String body) {
 		Source source = new StreamSource(new StringReader(body));
 		Employee e = (Employee) jaxb2Mashaller.unmarshal(source);
-		employeeDS.add(e);
+		employeeService.add(e);
 		return new ModelAndView(XML_VIEW_NAME, "object", e);
 	}
 	
 	@RequestMapping(method=RequestMethod.DELETE, value="/employee/{id}")
 	public ModelAndView removeEmployee(@PathVariable String id) {
-		employeeDS.remove(Long.parseLong(id));
-		List<Employee> employees = employeeDS.getAll();
+		employeeService.remove(Long.parseLong(id));
+		List<Employee> employees = employeeService.getAll();
 		EmployeeList list = new EmployeeList(employees);
 		return new ModelAndView(XML_VIEW_NAME, "employees", list);
-	}
+	}*/
 	
 	@RequestMapping(method=RequestMethod.GET, value="/employees")
 	public ModelAndView getEmployees() {
-		List<Employee> employees = employeeDS.getAll();
+		List<Employee> employees = employeeService.getAll();
 		EmployeeList list = new EmployeeList(employees);
 		return new ModelAndView(XML_VIEW_NAME, "employees", list);
 	}

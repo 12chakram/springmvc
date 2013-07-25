@@ -7,5 +7,9 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-	<bean id="employeeDS" class="dw.spring3.rest.ds.EmployeeDS" />
+	<bean id="employeeService" class="dw.spring3.rest.services.EmployeeService" >
+		 <property name="employeeManager" ref="empManager"></property>
+	 </bean>
+	
+	<bean id="empManager" class="dw.spring3.rest.managers.impl.JpaEmployeeManager"></bean>
 </beans>

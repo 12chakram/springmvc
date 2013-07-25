@@ -1,16 +1,15 @@
-package dw.spring3.rest.ds;
+package dw.spring3.rest.services;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import dw.spring3.rest.bean.Employee;
+import dw.spring3.rest.managers.EmployeeManager;
 
-public class EmployeeDS {
+public class EmployeeService {
+	
+	private EmployeeManager employeeManager;
 
-	private static Map<Long, Employee> allEmployees;
+	/*private static Map<Long, Employee> allEmployees;
 	static {
 		allEmployees = new HashMap<Long, Employee>();
 		Employee e1 = new Employee(1L, "Huang Yi Ming", "huangyim@cn.ibm.com");
@@ -25,23 +24,32 @@ public class EmployeeDS {
 
 	public Employee get(long id) {
 		return allEmployees.get(id);
-	}
+	}*/
 
-	public List<Employee> getAll() {
+	/*public List<Employee> getAll() {
 		List<Employee> employees = new ArrayList<Employee>();
 		for( Iterator<Employee> it = allEmployees.values().iterator(); it.hasNext(); ) {
 			Employee e = it.next();
 			employees.add(e);
 		}
 		return employees;
-	}
+	}*/
+	
 
-	public void remove(long id) {
+	/*public void remove(long id) {
 		allEmployees.remove(id);
 	}
 
 	public void update(Employee e) {
 		allEmployees.put(e.getId(), e);
+	}*/
+	
+	public void setEmployeeManager(EmployeeManager employeeManager) {
+		this.employeeManager = employeeManager;
+	}
+
+	public List<Employee> getAll() {
+		return employeeManager.getAllEmployees();
 	}
 
 }
